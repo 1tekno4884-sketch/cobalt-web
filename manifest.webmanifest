@@ -1,0 +1,22 @@
+{
+  "name": "Cobalt",
+  "short_name": "Cobalt",
+  "description": "Tasks and calendar, end-to-end encrypted and synced with the Cobalt Android app. Made by Brayden.",
+  "id": "./",
+  "start_url": "./#/tasks",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#F8F9FF",
+  "theme_color": "#1F5BFF",
+  "categories": ["productivity", "utilities"],
+  "icons": [
+    { "src": "icons/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" },
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icons/maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ],
+  "shortcuts": [
+    { "name": "Tasks", "url": "./#/tasks" },
+    { "name": "Calendar", "url": "./#/calendar" }
+  ]
+}

@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <title>Cobalt</title>
+  <meta name="description" content="Cobalt on the web: your tasks and calendar, end-to-end encrypted and synced with the Cobalt Android app. Made by Brayden.">
+  <meta name="theme-color" content="#F8F9FF">
+  <meta name="color-scheme" content="light dark">
+  <meta property="og:site_name" content="Cobalt">
+  <meta property="og:title" content="Cobalt — tasks and calendar">
+  <meta property="og:description" content="Your Cobalt tasks and calendar in the browser. Encrypted on your device before it's uploaded.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="icons/icon-512.png">
+  <link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+  <link rel="icon" href="icons/icon-192.png" sizes="192x192" type="image/png">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <a class="skip" href="#main-pane">Skip to content</a>
+  <div id="app"><div class="boot" aria-label="Loading Cobalt"><img src="icons/icon.svg" alt="" width="72" height="72"></div></div>
+  <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+  <noscript><p style="padding:24px;font-family:system-ui">Cobalt needs JavaScript to run.</p></noscript>
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
