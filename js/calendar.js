@@ -37,7 +37,7 @@ function eventRow(x, day) {
     <button data-ev="${e.id}" data-occ="${occ}">
       <span class="ev-bar"></span>
       <span class="ev-text"><span class="title">${esc(e.title || "(untitled)")}</span>
-        <span class="sub">${e.kind === "reminder" ? icon("bell") : ""}${esc(timeText(e, occ, day))}${e.repeat !== "None" ? icon("repeat") : ""}${e.note ? " · " + esc(e.note) : ""}</span></span>
+        <span class="sub">${e.kind === "reminder" ? icon("bell") : ""}${esc(timeText(e, occ, day))}${e.repeat !== "None" ? icon("repeat") : ""}${e.loc ? " · " + esc(e.loc) : ""}${e.note ? " · " + esc(e.note) : ""}</span></span>
     </button></li>`;
 }
 function dayList(day, items) {

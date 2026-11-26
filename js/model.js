@@ -100,6 +100,9 @@ export function normEvent(o) {
     u: Number(o.u ?? 0),
   };
   if (o.until != null) e.until = Number(o.until);
+  // Update 4: optional location ("loc"), same as Event.location on Android
+  const loc = String(o.loc ?? "").trim().slice(0, 500);
+  if (loc) e.loc = loc;
   return e;
 }
 export const evLength = (e) => Math.max(0, e.end - e.start);
@@ -183,7 +186,8 @@ export function merge(local, remote, now = Date.now()) {
     const out = [];
     for (const id of new Set([...lm.keys(), ...rm.keys()])) {
       const a = lm.get(id), b = rm.get(id);
-      const win = !a ? b : !b ? a : a.u > b.u ? a : b;
+      // same edit but an older client (Cobalt 1.2) dropped fields it didn't know (e.g. loc): keep the richer copy
+      const win = !a ? b : !b ? a : a.u > b.u ? a : a.u === b.u && a.loc && !b.loc ? a : b;
       if (win.u > (tomb[`${prefix}:${id}`] ?? -Infinity)) out.push(win);
     }
     return out;

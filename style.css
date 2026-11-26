@@ -1,38 +1,67 @@
-/* Cobalt web — Material 3 look matching the Android app's classic Cobalt scheme (ui/theme/Theme.kt). */
+/* Cobalt web — Material 3, matching the Android app. Default colour = Tide teal #1E88A8 (Update 4, same TonalSpot
+   scheme as the app's "Tide" colour); data-accent="classic" keeps the original hand-tuned Cobalt blue. */
 :root {
-  --primary: #1F55E0; --on-primary: #fff; --primary-container: #DBE3FF; --on-primary-container: #00174B;
-  --secondary-container: #D9E2FF; --on-secondary-container: #0A1A3D;
-  --tertiary: #00658E; --tertiary-container: #C7E7FF; --on-tertiary-container: #001E2E;
+  --primary: #00677F; --on-primary: #fff; --primary-container: #B9EAFF; --on-primary-container: #001F28;
+  --secondary-container: #CEE6F0; --on-secondary-container: #061E26;
+  --tertiary: #5B5B7E; --tertiary-container: #E1DFFF; --on-tertiary-container: #181837;
   --error: #BA1A1A; --on-error: #fff; --error-container: #FFDAD6; --on-error-container: #410002;
-  --bg: #F8F9FF; --on-surface: #191B23; --on-surface-variant: #444752; --outline: #747784; --outline-variant: #C4C6D4;
-  --sc-lowest: #FFFFFF; --sc-low: #F1F3FD; --sc: #EBEEF9; --sc-high: #E5E8F4; --sc-highest: #DFE2EE;
-  --scrim: rgba(7, 12, 30, .45);
+  --bg: #F5FAFD; --on-surface: #171C1F; --on-surface-variant: #40484C; --outline: #70787C; --outline-variant: #C0C8CC;
+  --sc-lowest: #FFFFFF; --sc-low: #EFF4F7; --sc: #E9EFF2; --sc-high: #E4E9EC; --sc-highest: #DEE3E6;
+  --scrim: rgba(4, 20, 28, .45);
+  --sea-a: #1E88A8; --sea-b: #4FD1E8; --sea-c: #7B7FC8;
   --font: system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans", Ubuntu, Cantarell, "Helvetica Neue", Arial, sans-serif;
   --r-card: 28px; --r-md: 20px; --r-sm: 14px;
   --ease: cubic-bezier(.2, .9, .25, 1.05);
   color-scheme: light;
 }
+:root[data-accent="classic"] {
+  --primary: #1F55E0; --on-primary: #fff; --primary-container: #DBE3FF; --on-primary-container: #00174B;
+  --secondary-container: #D9E2FF; --on-secondary-container: #0A1A3D;
+  --tertiary: #00658E; --tertiary-container: #C7E7FF; --on-tertiary-container: #001E2E;
+  --bg: #F8F9FF; --on-surface: #191B23; --on-surface-variant: #444752; --outline: #747784; --outline-variant: #C4C6D4;
+  --sc-lowest: #FFFFFF; --sc-low: #F1F3FD; --sc: #EBEEF9; --sc-high: #E5E8F4; --sc-highest: #DFE2EE;
+  --scrim: rgba(7, 12, 30, .45);
+  --sea-a: #1F5BFF; --sea-b: #4FA8FF; --sea-c: #7FE3FF;
+}
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
+    --primary: #85D1EE; --on-primary: #003544; --primary-container: #004E60; --on-primary-container: #B9EAFF;
+    --secondary-container: #344A52; --on-secondary-container: #CEE6F0;
+    --tertiary: #C4C3EA; --tertiary-container: #434465; --on-tertiary-container: #E1DFFF;
+    --error: #FFB4AB; --on-error: #690005; --error-container: #93000A; --on-error-container: #FFDAD6;
+    --bg: #0E1417; --on-surface: #DEE3E6; --on-surface-variant: #C0C8CC; --outline: #8A9296; --outline-variant: #40484C;
+    --sc-lowest: #090F12; --sc-low: #171C1F; --sc: #1B2023; --sc-high: #252B2E; --sc-highest: #303639;
+    --scrim: rgba(0, 0, 0, .6);
+    --sea-a: #1E88A8; --sea-b: #4FD1E8; --sea-c: #5E62A8;
+    color-scheme: dark;
+  }
+  :root[data-accent="classic"]:not([data-theme="light"]) {
     --primary: #B4C5FF; --on-primary: #002A78; --primary-container: #1A44C2; --on-primary-container: #DBE3FF;
     --secondary-container: #37466F; --on-secondary-container: #D9E2FF;
     --tertiary: #84CFFF; --tertiary-container: #004C6C; --on-tertiary-container: #C7E7FF;
-    --error: #FFB4AB; --on-error: #690005; --error-container: #93000A; --on-error-container: #FFDAD6;
     --bg: #0D1220; --on-surface: #E1E2EE; --on-surface-variant: #C4C6D4; --outline: #8E909E; --outline-variant: #444752;
     --sc-lowest: #080C18; --sc-low: #151A29; --sc: #191F2E; --sc-high: #232939; --sc-highest: #2E3444;
-    --scrim: rgba(0, 0, 0, .6);
-    color-scheme: dark;
+    --sea-a: #1F5BFF; --sea-b: #4FA8FF; --sea-c: #7FE3FF;
   }
 }
 :root[data-theme="dark"] {
+  --primary: #85D1EE; --on-primary: #003544; --primary-container: #004E60; --on-primary-container: #B9EAFF;
+  --secondary-container: #344A52; --on-secondary-container: #CEE6F0;
+  --tertiary: #C4C3EA; --tertiary-container: #434465; --on-tertiary-container: #E1DFFF;
+  --error: #FFB4AB; --on-error: #690005; --error-container: #93000A; --on-error-container: #FFDAD6;
+  --bg: #0E1417; --on-surface: #DEE3E6; --on-surface-variant: #C0C8CC; --outline: #8A9296; --outline-variant: #40484C;
+  --sc-lowest: #090F12; --sc-low: #171C1F; --sc: #1B2023; --sc-high: #252B2E; --sc-highest: #303639;
+  --scrim: rgba(0, 0, 0, .6);
+  --sea-a: #1E88A8; --sea-b: #4FD1E8; --sea-c: #5E62A8;
+  color-scheme: dark;
+}
+:root[data-theme="dark"][data-accent="classic"] {
   --primary: #B4C5FF; --on-primary: #002A78; --primary-container: #1A44C2; --on-primary-container: #DBE3FF;
   --secondary-container: #37466F; --on-secondary-container: #D9E2FF;
   --tertiary: #84CFFF; --tertiary-container: #004C6C; --on-tertiary-container: #C7E7FF;
-  --error: #FFB4AB; --on-error: #690005; --error-container: #93000A; --on-error-container: #FFDAD6;
   --bg: #0D1220; --on-surface: #E1E2EE; --on-surface-variant: #C4C6D4; --outline: #8E909E; --outline-variant: #444752;
   --sc-lowest: #080C18; --sc-low: #151A29; --sc: #191F2E; --sc-high: #232939; --sc-highest: #2E3444;
-  --scrim: rgba(0, 0, 0, .6);
-  color-scheme: dark;
+  --sea-a: #1F5BFF; --sea-b: #4FA8FF; --sea-c: #7FE3FF;
 }
 
 * { box-sizing: border-box; }
@@ -181,7 +210,7 @@ main#main-pane { flex: 1; min-width: 0; }
 
 /* ---------------------------------------------------------------- sign in */
 .signin { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 24px 16px; gap: 18px;
-  background: radial-gradient(ellipse at 20% 0%, color-mix(in srgb, #1F5BFF 22%, transparent), transparent 60%), radial-gradient(ellipse at 100% 100%, color-mix(in srgb, #4FA8FF 18%, transparent), transparent 55%), var(--bg); }
+  background: radial-gradient(ellipse at 20% 0%, color-mix(in srgb, var(--sea-a) 22%, transparent), transparent 60%), radial-gradient(ellipse at 100% 100%, color-mix(in srgb, var(--sea-b) 18%, transparent), transparent 55%), var(--bg); }
 .signin .enc-note { margin: 0; padding: 0; }
 .signin-card { width: min(420px, 100%); padding: 32px 26px 24px; text-align: center; background: var(--sc-low); box-shadow: 0 10px 40px rgba(0, 0, 0, .12); }
 .signin-card h1 { margin: 10px 0 4px; }
@@ -299,7 +328,7 @@ main#main-pane { flex: 1; min-width: 0; }
 
 /* ---------------------------------------------------------------- account */
 .account-card { display: flex; align-items: center; gap: 16px; }
-.avatar { width: 56px; height: 56px; border-radius: 50%; background: linear-gradient(135deg, #071E6B, #1F5BFF 55%, #4FA8FF); color: #fff; display: grid; place-items: center; font-size: 24px; font-weight: 700; flex: none; }
+.avatar { width: 56px; height: 56px; border-radius: 50%; background: linear-gradient(135deg, #0E1B2E, #06323F 45%, #1E88A8); color: #fff; display: grid; place-items: center; font-size: 24px; font-weight: 700; flex: none; }
 
 /* ---------------------------------------------------------------- dialogs + toast */
 dialog.sheet { border: 0; padding: 0; background: var(--sc-low); color: var(--on-surface); border-radius: var(--r-card); width: min(560px, calc(100vw - 24px)); max-height: calc(100vh - 32px); box-shadow: 0 20px 60px rgba(0, 0, 0, .3); }
@@ -319,10 +348,81 @@ dialog.sheet[open] { animation: rise .32s var(--ease); }
 .choice-buttons { display: flex; flex-direction: column; gap: 8px; }
 .toast { position: fixed; left: 50%; bottom: calc(100px + env(safe-area-inset-bottom)); transform: translate(-50%, 20px); opacity: 0; z-index: 100; display: flex; align-items: center; gap: 12px; background: #2E3036; color: #EFF0F8; padding: 6px 8px 6px 18px; min-height: 48px; border-radius: 14px; box-shadow: 0 6px 20px rgba(0, 0, 0, .3); transition: all .25s var(--ease); max-width: calc(100vw - 32px); }
 .toast.show { opacity: 1; transform: translate(-50%, 0); }
-.toast .btn.text { color: #B4C5FF; }
+.toast .btn.text { color: #85D1EE; }
 @media (min-width: 840px) { .toast { bottom: 32px; } }
 
 /* ---------------------------------------------------------------- reduced motion */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; }
 }
+
+/* ---------------------------------------------------------------- Sea Glass (Update 4)
+   html[data-glass="subtle|standard|clear"]: frosted chrome (nav, FAB, sheets, toast) with backdrop blur, see-through
+   cards/rows (no blur on long lists) over a soft sea backdrop, 1px specular rim lighter top-left + inner sheen.
+   data-glass-tint="neutral" drops the theme tint. Opacity was chosen so text keeps >= 4.5:1 on the backdrop, and
+   prefers-contrast / prefers-reduced-transparency make panels nearly solid. */
+:root[data-glass] { --glass-a: 64%; --chrome-a: 72%; --glass-blur: 26px; --glass-panel: var(--sc);
+  --rim-hi: rgba(255, 255, 255, .75); --rim-lo: rgba(0, 0, 0, .06); --sheen: rgba(255, 255, 255, .22); }
+:root[data-glass="subtle"] { --glass-a: 80%; --chrome-a: 86%; --glass-blur: 18px; }
+:root[data-glass="clear"] { --glass-a: 50%; --chrome-a: 60%; --glass-blur: 34px; }
+:root[data-glass]:not([data-glass-tint="neutral"]) { --glass-panel: color-mix(in srgb, var(--sc) 92%, var(--primary)); }
+:root[data-glass][data-glass-tint="neutral"] { --glass-panel: #F6F8FA; }
+@media (prefers-color-scheme: dark) {
+  :root[data-glass]:not([data-theme="light"]) { --rim-hi: rgba(255, 255, 255, .30); --rim-lo: rgba(255, 255, 255, .06); --sheen: rgba(255, 255, 255, .07); }
+  :root[data-glass][data-glass-tint="neutral"]:not([data-theme="light"]) { --glass-panel: #1B1E24; }
+}
+:root[data-glass][data-theme="dark"] { --rim-hi: rgba(255, 255, 255, .30); --rim-lo: rgba(255, 255, 255, .06); --sheen: rgba(255, 255, 255, .07); }
+:root[data-glass][data-theme="dark"][data-glass-tint="neutral"] { --glass-panel: #1B1E24; }
+
+:root[data-glass] body {
+  background:
+    radial-gradient(60vmax 60vmax at 8% 4%, color-mix(in srgb, var(--sea-a) 26%, transparent), transparent 70%),
+    radial-gradient(55vmax 55vmax at 100% 48%, color-mix(in srgb, var(--sea-b) 20%, transparent), transparent 70%),
+    radial-gradient(60vmax 60vmax at 18% 100%, color-mix(in srgb, var(--sea-c) 18%, transparent), transparent 70%),
+    var(--bg);
+  background-attachment: fixed;
+}
+:root[data-glass][data-glass-tint="neutral"] body {
+  background:
+    radial-gradient(60vmax 60vmax at 8% 4%, rgba(110, 139, 168, .22), transparent 70%),
+    radial-gradient(55vmax 55vmax at 100% 48%, rgba(127, 167, 160, .18), transparent 70%),
+    radial-gradient(60vmax 60vmax at 18% 100%, rgba(140, 143, 176, .16), transparent 70%),
+    var(--bg);
+  background-attachment: fixed;
+}
+/* see-through panels (cards, rows): no blur */
+:root[data-glass] :is(.card:not(.primary-container), .task, .ev-row button, .signin-card) {
+  background: linear-gradient(180deg, var(--sheen), transparent 45%), color-mix(in srgb, var(--sc-low) var(--glass-a), transparent);
+  box-shadow: inset 1px 1px 0 var(--rim-hi), inset -1px -1px 0 var(--rim-lo);
+}
+:root[data-glass] .day-list .task, :root[data-glass] .task.done { background: linear-gradient(180deg, var(--sheen), transparent 45%), color-mix(in srgb, var(--sc) var(--glass-a), transparent); }
+/* frosted chrome: real backdrop blur */
+:root[data-glass] :is(.nav, .fab, dialog.sheet, .toast) {
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(1.4);
+  backdrop-filter: blur(var(--glass-blur)) saturate(1.4);
+  box-shadow: inset 1px 1px 0 var(--rim-hi), inset -1px -1px 0 var(--rim-lo), 0 8px 30px rgba(0, 0, 0, .12);
+}
+:root[data-glass] .nav { background: linear-gradient(180deg, var(--sheen), transparent 60%), color-mix(in srgb, var(--glass-panel) var(--chrome-a), transparent); }
+:root[data-glass] .fab { background: color-mix(in srgb, var(--primary-container) calc(var(--chrome-a) + 15%), transparent); }
+:root[data-glass] dialog.sheet { background: color-mix(in srgb, var(--glass-panel) 90%, transparent); }
+:root[data-glass] dialog.sheet::backdrop { -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); }
+:root[data-glass] .toast { background: color-mix(in srgb, #2E3036 88%, transparent); }
+@media (max-width: 839px) {
+  /* phones: the bar floats over the content as a rounded pill */
+  :root[data-glass] .nav { left: 10px; right: 10px; bottom: calc(8px + env(safe-area-inset-bottom)); height: 72px; padding-bottom: 0; border-radius: 28px; }
+  :root[data-glass] .fab { bottom: calc(96px + env(safe-area-inset-bottom)) !important; }
+}
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  :root[data-glass] { --chrome-a: 92%; }
+}
+@media (prefers-contrast: more), (prefers-reduced-transparency: reduce) {
+  :root[data-glass] { --glass-a: 95%; --chrome-a: 95%; }
+}
+
+/* appearance controls */
+.swatches { display: flex; gap: 10px; flex-wrap: wrap; }
+.swatch-btn { display: inline-flex; align-items: center; gap: 8px; height: 40px; padding: 0 14px 0 8px; border-radius: 99px; border: 1px solid var(--outline-variant); background: none; font-weight: 600; }
+.swatch-btn i { width: 24px; height: 24px; border-radius: 50%; display: block; }
+.swatch-btn[aria-pressed="true"] { border-color: var(--primary); box-shadow: 0 0 0 1px var(--primary); }
+.set-row { display: flex; align-items: center; gap: 12px; padding: 6px 0; }
+.set-row > div { flex: 1; }

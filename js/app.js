@@ -18,10 +18,16 @@ const DEVICE = `Web · ${browser}`;
 // ------------------------------------------------------------------ theme
 function applyTheme() {
   const t = store.pref.get("theme", "system");
-  if (t === "system") document.documentElement.removeAttribute("data-theme");
-  else document.documentElement.dataset.theme = t;
+  const root = document.documentElement;
+  if (t === "system") root.removeAttribute("data-theme");
+  else root.dataset.theme = t;
+  // Update 4: Tide teal is the default colour; "classic" keeps the original Cobalt blue.
+  if (store.pref.get("accent", "tide") === "classic") root.dataset.accent = "classic"; else root.removeAttribute("data-accent");
+  // Sea Glass (off by default): strength subtle | standard | clear, tint on/off.
+  if (store.pref.get("glass", false)) root.dataset.glass = store.pref.get("glassStrength", "standard"); else root.removeAttribute("data-glass");
+  if (store.pref.get("glassTint", true)) root.removeAttribute("data-glass-tint"); else root.dataset.glassTint = "neutral";
   const dark = t === "dark" || (t === "system" && matchMedia("(prefers-color-scheme: dark)").matches);
-  $('meta[name="theme-color"]').content = dark ? "#0D1220" : "#F8F9FF";
+  $('meta[name="theme-color"]').content = getComputedStyle(document.documentElement).getPropertyValue("--bg").trim() || (dark ? "#0E1417" : "#F5FAFD");
 }
 applyTheme();
 matchMedia("(prefers-color-scheme: dark)").addEventListener("change", applyTheme);
@@ -88,11 +94,17 @@ function renderStatus() {
 
 // ------------------------------------------------------------------ sign in
 const symbols = `<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
-  <linearGradient id="cg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#071E6B"/><stop offset=".55" stop-color="#1F5BFF"/><stop offset="1" stop-color="#4FA8FF"/></linearGradient>
-  <symbol id="cobalt-mark" viewBox="0 0 108 108"><rect width="108" height="108" rx="28" fill="url(#cg)"/>
-    <circle cx="54" cy="54" r="30" fill="none" stroke="#fff" stroke-opacity=".35" stroke-width="6"/>
-    <path d="M54 24a30 30 0 0 1 30 30" fill="none" stroke="#7FE3FF" stroke-width="6" stroke-linecap="round"/>
-    <path d="M40 55l10 10 20-22" fill="none" stroke="#fff" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/></symbol></defs></svg>`;
+    <linearGradient id="cm-bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0E1B2E"/><stop offset="1" stop-color="#06323F"/></linearGradient>
+    <radialGradient id="cm-glow" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#4FD1E8" stop-opacity=".28"/><stop offset="1" stop-color="#4FD1E8" stop-opacity="0"/></radialGradient>
+    <linearGradient id="cm-ring" gradientUnits="userSpaceOnUse" x1="34" y1="74" x2="74" y2="34"><stop offset="0" stop-color="#4FD1E8"/><stop offset="1" stop-color="#fff"/></linearGradient>
+  
+  <symbol id="cobalt-mark" viewBox="0 0 108 108"><rect width="108" height="108" rx="28" fill="url(#cm-bg)"/>
+  <circle cx="54" cy="54" r="43" fill="url(#cm-glow)"/>
+  <g transform="translate(54 54) scale(1.45) translate(-54 -54)" fill="none" stroke-linecap="round" stroke-width="6">
+    <path d="M54,34 A20,20 0 1,0 74,54" stroke="url(#cm-ring)"/>
+    <path d="M45,54.5 L51.5,61 L64,47.5" stroke="#fff" stroke-linejoin="round"/>
+    <circle cx="68.1" cy="39.9" r="4.2" fill="#7FF0E0" stroke="none"/>
+  </g></symbol></defs></svg>`;
 
 function signInScreen({ locked = null, msg = "" } = {}) {
   const u = locked?.username ?? S.sess?.username ?? "";
@@ -243,6 +255,21 @@ function renderAccount(root) {
       <p class="hint">Changes sync a few seconds after you make them, when you come back to this tab, and every few minutes while it's open.</p>
     </section>
     <section class="card">
+      <h2 class="sec">${icon("auto")} Appearance</h2>
+      <p class="muted small" style="margin-bottom:8px">Colour</p>
+      <div class="swatches">
+        ${[["tide", "Tide", "#1E88A8"], ["classic", "Classic", "#1F5BFF"]].map(([v, l, c]) => `<button class="swatch-btn" data-accent="${v}" aria-pressed="${store.pref.get("accent", "tide") === v}"><i style="background:${c}"></i>${l}</button>`).join("")}
+      </div>
+      <div class="set-row" style="margin-top:12px"><div><p>Sea Glass</p><p class="muted small">Frosted, see-through bars, cards and sheets over a soft sea backdrop</p></div>
+        <input type="checkbox" role="switch" data-glass-switch ${store.pref.get("glass", false) ? "checked" : ""} aria-label="Sea Glass"></div>
+      <div ${store.pref.get("glass", false) ? "" : "hidden"}>
+        <p class="muted small" style="margin:6px 0 8px">Strength</p>
+        <div class="seg" role="group" aria-label="Glass strength">${[["subtle", "Subtle"], ["standard", "Standard"], ["clear", "Clear"]].map(([v, l]) => `<button class="${store.pref.get("glassStrength", "standard") === v ? "on" : ""}" data-strength="${v}">${l}</button>`).join("")}</div>
+        <div class="set-row"><div><p>Tint with theme colour</p><p class="muted small">Off = neutral frost</p></div>
+          <input type="checkbox" role="switch" data-tint-switch ${store.pref.get("glassTint", true) ? "checked" : ""} aria-label="Tint with theme colour"></div>
+      </div>
+    </section>
+    <section class="card">
       <h2 class="sec">${icon("calendar")} Calendar</h2>
       <label class="field"><span>Week starts on</span>
         <select name="ws">${[[1, "Monday"], [7, "Sunday"], [6, "Saturday"]].map(([v, l]) => `<option value="${v}" ${S.weekStart === v ? "selected" : ""}>${l}</option>`).join("")}</select></label>
@@ -258,6 +285,11 @@ function renderAccount(root) {
     <p class="muted small center">Cobalt web ${VERSION}${IS_LIVE ? "" : ` · ${esc(API_URL)}`}</p>`;
   $("[data-sync-now]", root)?.addEventListener("click", () => syncNow({ quiet: false }).then(() => toast("Synced")).catch(() => {}));
   $("[data-resign]", root)?.addEventListener("click", () => signInScreen({ msg: "Your session ended. Sign in again to keep syncing." }));
+  const restyle = () => { applyTheme(); draw(); };
+  $$("button[data-accent]", root).forEach((b) => b.addEventListener("click", () => { store.pref.set("accent", b.dataset.accent); restyle(); }));
+  $("[data-glass-switch]", root).addEventListener("change", (e) => { store.pref.set("glass", e.target.checked); restyle(); });
+  $("[data-tint-switch]", root).addEventListener("change", (e) => { store.pref.set("glassTint", e.target.checked); restyle(); });
+  $$("[data-strength]", root).forEach((b) => b.addEventListener("click", () => { store.pref.set("glassStrength", b.dataset.strength); restyle(); }));
   $("select[name=ws]", root).addEventListener("change", (e) => { S.weekStart = Number(e.target.value); store.pref.set("weekStart", S.weekStart); toast("Saved"); });
   $("[data-signout]", root).addEventListener("click", async () => {
     const ok = await choose("Sign out?", "This browser forgets your data and key. Everything stays on your phone and in the encrypted synced copy.", [{ label: "Sign out", value: true }]);

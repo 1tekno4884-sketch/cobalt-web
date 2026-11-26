@@ -121,6 +121,7 @@ export function eventEditor(ev = null, { day = M.today(), occ = null, sMin = nul
       <fieldset><legend>${icon("bell")} Remind me</legend><div class="chips wrap">${reminds}</div>
         <p class="hint">Notifications show on your phone with the Cobalt app. All-day items remind at 9:00.</p></fieldset>
       <fieldset><legend>Colour</legend><div class="swatches">${colors}</div></fieldset>
+      <label class="field"><span>Location</span><input name="loc" value="${esc(e.loc ?? "")}" maxlength="500" autocomplete="off" placeholder="Where?"></label>
       <label class="field"><span>Notes</span><textarea name="note" rows="2" maxlength="4000">${esc(e.note)}</textarea></label>
       <div class="actions">
         ${ev ? `<button type="button" class="btn danger-text" data-delete>${icon("del")} Delete</button>` : ""}
@@ -165,7 +166,7 @@ export function eventEditor(ev = null, { day = M.today(), occ = null, sMin = nul
     const repeat = f.repeat.value;
     const rd = $$("input[name=rd]:checked", f).map((y) => +y.value);
     const until = repeat === "None" ? null : M.fromIso(f.until.value);
-    const fields = { ...(ev ?? {}), id: ev?.id ?? 0, title: f.ttl.value, note: f.note.value, kind, start, end, allDay,
+    const fields = { ...(ev ?? {}), id: ev?.id ?? 0, title: f.ttl.value, note: f.note.value, loc: kind === "reminder" ? "" : f.loc.value, kind, start, end, allDay,
       sMin: s, eMin, repeat, repeatDays: repeat === "Custom" ? (rd.length ? rd : [M.isoDow(start)]) : [],
       until: until != null && until >= start ? until : null, color: +(f.color.value || 0),
       remind: $$("input[name=remind]:checked", f).map((y) => +y.value) };

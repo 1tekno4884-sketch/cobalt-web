@@ -1,7 +1,7 @@
 // Cobalt web service worker — caches the app shell only (HTML, CSS, JS, icons) so it opens fast, works offline and
 // installs as a PWA. It never stores API responses: those are on another origin and pass straight through.
 // Your data is cached separately, encrypted, in IndexedDB (js/store.js).
-const VERSION = "cobalt-shell-v1";
+const VERSION = "cobalt-shell-v2";   // cache key (bump when shell files change), not the app version
 const SHELL = [
   "./", "index.html", "style.css", "config.js", "manifest.webmanifest",
   "js/app.js", "js/state.js", "js/store.js", "js/dom.js", "js/model.js", "js/crypto.js", "js/vault.js",
